@@ -1,0 +1,44 @@
+{
+  "name": "standing-menacingly",
+  "version": "1.0.0",
+  "description": "Standing Menacingly (tentative) is my take on Punchout!! for the Nintendo Entertainment System. It blends elements from Japanese pop culture icons such as Jojo's Bizarre Adventure to bring a creative spin on the classic game by only allowing the user to play with their voice.",
+  "main": "index.js",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "watch": "webpack --watch --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echin522/Javascript-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echin522/Javascript-Project/issues"
+  },
+  "homepage": "https://github.com/echin522/Javascript-Project#readme",
+  "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "core-js": "^3.22.2",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.50.1",
+    "sass-loader": "^12.6.0",
+    "three": "^0.139.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "vite": "^2.9.5"
+  }
+}
