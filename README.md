@@ -32,7 +32,8 @@ Options (not voice controlled)
 
 # Wireframe #
 
-![Alt text](https://wireframe.cc/sGC4ed "Wireframe")
+![Wireframe](/edgar-chin-project/images/wireframe.png)
+
 ## Person ##
     Player's character
 ## Menu ##
