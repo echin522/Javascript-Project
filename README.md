@@ -32,7 +32,7 @@ Options (not voice controlled)
 
 # Wireframe #
 
-![Wireframe](https://wireframe.cc/sGC4ed)
+![Alt text](https://wireframe.cc/sGC4ed "Wireframe")
 ## Person ##
     Player's character
 ## Menu ##
