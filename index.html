@@ -1,40 +1,73 @@
+<!DOCTYPE html>
 <html lang="en">
+  	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    <script src="./dist/main.js"></script>
-    <title>Project Name</title>
-  </head>
+		<link rel="stylesheet" href="/stylesheets/reset.css" />
+		<link rel="stylesheet" href="/stylesheets/navbar.css" />
+		<link rel="stylesheet" href="/stylesheets/menu.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
-  <body>
-    
-    <nav id="gameplay-bar">
-      <i class="icon fa-volume"></i>
-      <!-- <i class="icon fa-volume-xmark"></i> -->
-      <i class="icon fa-music-note"></i>
-      <!-- <i class="icon fa-music-note-slash"></i> -->
-      <i class="icon fa-pause"></i>
-      <!-- <i class="icon fa-play"></i> -->
-    </nav>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+					"OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js"
+				}
+			}
+		</script>
 
-    
-
-    <nav id="social-media-bar">
-      <a href="https://github.com/echin522" target="_blank">
-        <i class="icon fa-github-square"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/edgarchin/" target="_blank">
-        <i class="icon fa-linkedin"></i>
-      </a>
-      <a href="mailto:echin522@gmail.com">
-        <i class="icon fa-square-envelope"></i>
-      </a>
-
-    </nav>
-
-  </body>
-
+		<title>Standing Menacingly</title>
+  	</head>
+  	<body>
+		<canvas id="background"></canvas>
+		<script type="module" src="main.js"></script>
+		
+		<nav class="navbar" id="gameplay-bar">
+			<li>
+				<i class="icon fa-solid fa-volume-high fa-2x"></i>
+			</li>
+			<li>
+				<i class="icon fa-solid fa-music fa-2x"></i>
+			</li>
+			<li>
+				<i class="icon fa-solid fa-pause fa-2x"></i>
+			</li>
+		</nav>
+		
+		<div id="title">
+			<p>STANDING</p>
+			<P>MENACINGLY</P>
+		</div>
+		
+		<div id="game-menus">
+			<div class="menu player">
+				<ul id="game-instructions">
+					<li>Instructions</li>
+					<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex atque et sint saepe provident suscipit?</li>
+				</ul>
+			</div>
+			
+			<div class="menu enemy">
+				<ul id="enemy-instructions">
+					<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex atque et sint saepe provident suscipit?</li>
+				</ul>
+			</div>
+		</div>
+		
+		<nav class="navbar" id="social-media-bar">
+			<a href="https://github.com/echin522" target="_blank">
+				<i class="icon fa-brands fa-github-square fa-3x"></i>
+			</a>
+			<a href="https://www.linkedin.com/in/edgarchin/" target="_blank">
+				<i class="icon fa-brands fa-linkedin fa-3x"></i>
+			</a>
+			<a href="mailto:echin522@gmail.com">
+				<i class="icon fa-solid fa-square-envelope fa-3x"></i>
+			</a>
+			
+		</nav>
+ 	 </body>
 </html>
