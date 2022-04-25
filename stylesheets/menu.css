@@ -31,7 +31,7 @@
 .menu {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     height: 400px;
     width: 30%;
     margin: 3%;
@@ -39,4 +39,27 @@
     border: 5px solid gray;
     box-shadow: 0 0 10px rgba(150, 150, 150, 5);
     border-radius: 5%;
+}
+
+.instructions {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.instructions > li{
+    text-align: center;
+    padding: 10px;
+}
+
+.instructions > li:first-child {
+    font-size: 20px;
+    padding-top: 40px;
+    font-weight: bold;
+}
+
+.instructions > li:last-child {
+    padding-bottom: 40px;
 }

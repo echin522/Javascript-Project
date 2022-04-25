@@ -41,7 +41,7 @@ table {
 	border-spacing: 0;
 }
 canvas {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 }
