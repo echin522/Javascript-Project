@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
   	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<link rel="stylesheet" href="/stylesheets/reset.css" />
-		<link rel="stylesheet" href="/stylesheets/navbar.css" />
-		<link rel="stylesheet" href="/stylesheets/menu.css" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
 		<script type="importmap">
 			{
@@ -18,23 +14,24 @@
 				}
 			}
 		</script>
+		
+		<link rel="stylesheet" href="/stylesheets/reset.css" />
+		<link rel="stylesheet" href="/stylesheets/navbar.css" />
+		<link rel="stylesheet" href="/stylesheets/menu.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+		
+		<!-- <script type="module" src="./resources/assets/OBJLoader.js"></script>
+		<script type="module" src="./resources/assets/MTLLoader.js"></script> -->
 
 		<title>Standing Menacingly</title>
   	</head>
+
   	<body>
-		<canvas id="background"></canvas>
-		<script type="module" src="main.js"></script>
-		
+		  
 		<nav class="navbar" id="gameplay-bar">
-			<li>
-				<i class="icon fa-solid fa-volume-high fa-2x"></i>
-			</li>
-			<li>
-				<i class="icon fa-solid fa-music fa-2x"></i>
-			</li>
-			<li>
-				<i class="icon fa-solid fa-pause fa-2x"></i>
-			</li>
+			<li><i class="icon fa-solid fa-volume-high fa-2x"></i></li>
+			<li><i class="icon fa-solid fa-music fa-2x"></i></li>
+			<li><i class="icon fa-solid fa-pause fa-2x"></i></li>
 		</nav>
 		
 		<div id="title">
@@ -43,15 +40,15 @@
 		</div>
 		
 		<div id="game-menus">
-			<div class="menu player">
-				<ul id="game-instructions">
-					<li>Instructions</li>
+			<div class="menu enemy">
+				<ul id="enemy-instructions">
 					<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex atque et sint saepe provident suscipit?</li>
 				</ul>
 			</div>
-			
-			<div class="menu enemy">
-				<ul id="enemy-instructions">
+
+			<div class="menu player">
+				<ul id="game-instructions">
+					<li>Instructions</li>
 					<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex atque et sint saepe provident suscipit?</li>
 				</ul>
 			</div>
@@ -67,7 +64,13 @@
 			<a href="mailto:echin522@gmail.com">
 				<i class="icon fa-solid fa-square-envelope fa-3x"></i>
 			</a>
-			
 		</nav>
- 	 </body>
+
+		<canvas id="background"></canvas>
+		<script type="module" src="/scripts/main.js"></script>
+
+		<!-- <script src="/scripts/audio-control.js"></script> -->
+
+	</body>
 </html>
+	

@@ -1,6 +1,11 @@
 import * as THREE from "three";
 import { DirectionalLight } from "three";
 import { OrbitControls } from 'OrbitControls';
+import { OBJLoader } from "/node_modules/three/examples/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "/node_modules/three/examples/jsm/loaders/MTLLoader.js";
+import Stats from "/node_modules/three/examples/jsm/libs/stats.module.js";
+
+////////////////////////////////////////////////////////////////////////////////
 
 // Setup our stage for the game
 const scene = new THREE.Scene();
@@ -14,16 +19,18 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement)
-renderer.setClearColor( 0x000000, 1);
+renderer.setClearColor( 0x000000, 0);
 // scene.background = new THREE.Color(0xa0a0a0)   // Sets the scene background to transparent
 // scene.fog = new THREE.Fog( 0xa0a0a0, 10, 50 );
-camera.position.setY(50);
+camera.position.setY(100);
 camera.position.setZ(30);
 // camera.rotation.set();
 
-renderer.render(scene, camera);
+function render() {
+    renderer.render(scene, camera);
+}
 
-// Setup camera controls. Giving me a lot of problems right now
+render();
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,36 +53,82 @@ scene.add(keyLightHelper, fillLightHelper, backLightHelper);
 // Setup camera controls and grid for testing
 // THIS IS VERY UGLY, PLEASE REFACTOR AND MAKE IT MORE DRY LATER
 const controls = new OrbitControls(camera, renderer.domElement);
-const gridHelper1 = new THREE.GridHelper(200, 50);
-const gridHelper2 = new THREE.GridHelper(200, 50);
-const gridHelper3 = new THREE.GridHelper(200, 50);
-const gridHelper4 = new THREE.GridHelper(200, 50);
-const gridHelper5 = new THREE.GridHelper(200, 50);
-const gridHelper6 = new THREE.GridHelper(200, 50);
-gridHelper2.rotation.x = Math.PI / 2
-gridHelper3.rotation.x = Math.PI / 2
-gridHelper4.rotation.z = Math.PI / 2
-gridHelper5.rotation.z = Math.PI / 2
-gridHelper2.position.setZ(100)
-gridHelper2.position.setY(100)
-gridHelper3.position.setZ(-100)
-gridHelper3.position.setY(100)
-gridHelper4.position.setX(100)
-gridHelper4.position.setY(100)
-gridHelper5.position.setX(-100)
-gridHelper5.position.setY(100)
-gridHelper6.position.setY(200)
-scene.add(gridHelper1, gridHelper2, gridHelper3, gridHelper4, gridHelper5, gridHelper6);
+const boxSize = 200;
+const numGridDivs = 50;
+const numGrids = 6
+function gridMaker(size, divs, num) {
+    const gridSides = [];
+    for (let i = 0; i < num; i ++) {
+        gridSides.push( new THREE.GridHelper(size, divs));
+    }
+    return gridSides
+}
+
+const myGrid = gridMaker(boxSize, numGridDivs, 6);
+myGrid[1].rotation.x = Math.PI / 2;
+myGrid[2].rotation.x = Math.PI / 2;
+myGrid[3].rotation.z = Math.PI / 2;
+myGrid[4].rotation.z = Math.PI / 2;
+myGrid[1].position.setZ(100);
+myGrid[1].position.setY(100);
+myGrid[2].position.setZ(-100);
+myGrid[2].position.setY(100);
+myGrid[3].position.setX(100);
+myGrid[3].position.setY(100);
+myGrid[4].position.setX(-100);
+myGrid[4].position.setY(100);
+myGrid[5].position.setY(200);
+scene.add(myGrid[0], myGrid[1], myGrid[2], myGrid[3], myGrid[4], myGrid[5]);
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// Start loading in the 3D models
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial( {color: 0xFF6347, wireframe: false} );
 const torus = new THREE.Mesh( geometry, material );
 torus.position.setY(25)
 scene.add(torus)
 
-// const objLoader = new OBJLoader();
+const modLoader = new OBJLoader();
+const mtlLoader = new MTLLoader();
+
+// Load in the model within the texture loader. The MTL file must be loaded in first 
+// This is mostly boilerplate code from the official three.js documentation website 
+mtlLoader.load(
+    "/resources/models/jotaro/Jotaro.mtl",
+    function(materials) {
+        materials.preload();
+        modLoader.load(
+            "/resources/models/jotaro/Jotaro.obj",
+        
+            function (obj) {
+                scene.add(obj);
+            },
+            // onProgress and onError functions are optional. Testing passed so poggers
+            // function (xhr) {
+            //     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+            // },
+        
+            // function (err) {
+            //     console.error( "error has occured" );
+            // },
+        )
+    },
+    // function (xhr) {
+    //     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    // },
+
+    // function (err) {
+    //     console.error( "error has occured" );
+    // },
+)
+
+////////////////////////////////////////////////////////////////////////////////
+
+// FPS Counter for fun
+const stats = Stats();
+document.body.appendChild(stats.dom);
+
 // camera.position.set(0, 0, 20);
 
 // load a resource
@@ -103,8 +156,9 @@ var animate = function() {
     torus.rotation.z += 0.01;
 
     controls.update();
+    stats.update
 
-    renderer.render(scene, camera);
+    render();
 }
 
 
