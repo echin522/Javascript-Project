@@ -1,33 +1,54 @@
-const canvas = document.querySelector("#player-menu");
+class AudioControl {
 
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    constructor () {
+        this.init()
+    }
 
-const recognition = new window.SpeechRecognition();
-recognition.intermResults = true;
+    init() {
+        const canvas = document.querySelector("button");
 
-recognition.onstart = function() {
-    console.log("Now listening to audio")
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        const recognition = new window.SpeechRecognition();
+        recognition.intermResults = true;
+
+        recognition.onstart = function() {
+            console.log("Now listening to audio")
+        }
+
+        recognition.onresult = function(e) {
+            var transcript = e.results[0][0].transcript;
+            var confidence = e.results[0][0].confidence;
+        }
+
+        // Output the users words once they've finished screaming
+        recognition.addEventListener('result', (e) => {
+            console.log("Speech recognition has ended");
+            // console.log(e);
+            console.log(e.results);
+            console.log(e.results[0]);
+            console.log(e.results[0][0]);
+            console.log(e.results[0][0].transcript);
+        });
+
+    // canvas.addEventListener(
+    //     "mousedown",
+        recognition.start()
+    // );
+    }
+    
 }
 
-recognition.onresult = function(e) {
-    var transcript = e.results[0][0].transcript;
-    var confidence = e.results[0][0].confidence;
-}
-
-// Output the users words once they've finished screaming
-recognition.addEventListener('result', (e) => {
-    console.log("Speech recognition has ended");
-    // console.log(e);
-    console.log(e.results);
-    console.log(e.results[0]);
-    console.log(e.results[0][0]);
-    console.log(e.results[0][0].transcript);
-});
-
-canvas.addEventListener(
-    "mousedown",
-    recognition.start()
-);
+// setInterval(
+//     function() {
+//         // recognition.start()
+//         setTimeout(
+//             recognition.stop(),
+//             500
+//         )
+//     },
+//     1000
+// )
 
 // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 // var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;

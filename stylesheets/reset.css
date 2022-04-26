@@ -44,4 +44,12 @@ canvas {
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: -1;
 }
+
+/* html {
+	height: 2000px;
+}
+body {
+	height: 2000px;
+} */

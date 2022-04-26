@@ -24,7 +24,7 @@
 		<title>Standing Menacingly</title>
 	</head>
 	
-	<body>
+	<body style="-webkit-font-smoothing: antialiased">
 		<canvas id="background"></canvas>
 
 		<script type="module" src="/scripts/scene.js"></script>
@@ -48,17 +48,18 @@
 				</ul>
 			</div>
 			
-			<div id="player-menu" class="menu player">
+			<div id="player-menu" class="menu">
 				<ul class="instructions">
 					<li>Instructions</li>
 					<li>The enemy has taken you lightly. <br><br>
 						He will allow you to punch him until you run out of strength. <br><br>
 						Your punches are powered by your voice. When you are ready, click anywhere in this window to register your catchphrase.
 					</li>
-					<li></li>
 					<li>Is this your punchphrase?</li>
-					<li>YES</li>
-					<li>NO</li>
+					<li style="display: flex; align-items: center; justify-content: space-evenly;">
+						<button>YES</button>
+						<button>NO</button>
+					</li>
 				</ul>
 			</div>
 		</div>
