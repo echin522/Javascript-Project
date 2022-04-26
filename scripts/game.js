@@ -34,8 +34,6 @@ export class Character {
 
         console.log(this.model);
         console.log(this.health);
-        
-        
     }
 
     takeDamage(dmg) {
