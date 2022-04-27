@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { AnimationMixer } from "three";
-
 import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 
 export class Game {
@@ -31,9 +30,7 @@ export class Character {
         this.model = model;
         this.health = health;
         this.clock = new THREE.Clock();
-
-        console.log(this.model);
-        console.log(this.health);
+        this.character = model;
     }
 
     takeDamage(dmg) {
@@ -53,16 +50,15 @@ export class Character {
         const loader = new GLTFLoader();
         loader.setPath("/resources/models/")
         
-        loader.load(`${character}/model.gltf`, function (gltf) {
+        loader.load(`${character}/idle.glb`, function (gltf) {
             let model = gltf.scene;
-            console.log(gltf.animations)
             model.scale.setScalar(scale);
             model.traverse(c => c.castShadow = true);
             model.position.setX(pos[0]);
             model.position.setY(pos[1]);
             model.position.setZ(pos[2]);
             model.setRotationFromEuler(new THREE.Euler( rot[0], rot[1], rot[2], 'XYZ' ))
-            
+            model.name = character;
             scene.add(model);
 
             // const mixer = new AnimationMixer(model);

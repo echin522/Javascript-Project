@@ -1,20 +1,30 @@
+@font-face {
+    font-family: 'striveFont';
+    src: url("/resources/assets/strive_font.otf") format("opentype");
+}
+
 #title {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-@font-face {
-    font-family: 'MyWebFont';
-    src: url('myfont.woff2') format('woff2');
+#title > p {
+    font-size: 11vh;
+    font-family: 'striveFont';
+    font-style: italic;
+    color: black;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: white;
 }
 
-#title > p {
-    /* font-size: 60px; */
-    font-size: 4vw;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bolder;
+p > span{
+    font-size: inherit;
+    font-family: 'striveFont';
     font-style: italic;
+    color: maroon;
+    -webkit-text-stroke-width: inherit;
+    -webkit-text-stroke-color: inherit;
 }
 
 #game-menus {
@@ -22,9 +32,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 60vh;
     gap: 10%;
     margin: 50px;
-    margin-top: 0px;
+    margin-top: 30px;
     /* align-items: center; */
 }
 
@@ -32,8 +43,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
-    width: 30%;
+    height: inherit;
+    width: 30vw;
     margin: 3%;
     /* padding-right: 50px; */
     border: 5px solid gray;
@@ -43,9 +54,9 @@
 }
 
 .instructions {
-    height: inherit;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     
 }
@@ -53,15 +64,41 @@
 .instructions > li {
     font-size: 1.25vw;
     text-align: center;
+    width: 20vw;
     padding: 10px;
 }
 
 .instructions > li:first-child {
-    font-size: 2.5vw;
-    padding-top: 40px;
-    font-weight: bold;
+    color: maroon;
+    -webkit-text-stroke-width: .2px;
+    -webkit-text-stroke-color: black;
+    font-size: 4vw;
+    font-family: "striveFont";
+    width: inherit;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    /* border: black 2px solid; */
 }
 
 .instructions > li:last-child {
     padding-bottom: 40px;
+}
+
+button {
+    font-family: striveFont;
+    font-size: 20px;
+    color: white;
+    border-radius: 8px;
+    background-color: maroon;
+    height: 4vh;
+    width: 8vw;
+
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#punch-phrase {
+    /* font-family: "codFont"; */
 }

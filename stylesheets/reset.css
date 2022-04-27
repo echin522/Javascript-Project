@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'striveFont';
+    src: url("/resources/assets/strive_font.otf") format("opentype");
+    font-family: 'genshinFont';
+    src: url("/resources/assets/genshin_font.ttf") format("opentype");
+	font-family: 'doomFont';
+    src: url("/resources/assets/doom_font.ttf") format("opentype");
+	font-family: 'codFont';
+    src: url("/resources/assets/cod_font.otf") format("opentype");
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -15,9 +26,11 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font-family: 'Open Sans', sans-serif;
+	font-family: "codFont";
 	vertical-align: baseline;
+	height: inherit;
 }
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;

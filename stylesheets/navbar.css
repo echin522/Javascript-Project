@@ -13,16 +13,24 @@
     height: 50px;
     width: 50px;
     margin: 5px;
+    align-items: center;
     display: flex;
+    /* border: 1px black solid; */
+}
+
+#gameplay-bar > li:first-child {
+    padding-right: .5vw;
 }
 
 .icon {
     color: black;
-    background-color: white;
     width: 40px;
     height: 40px;
     text-align: center;
     vertical-align: text-bottom;
+    -webkit-text-fill-color: maroon;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: grey;
 }
 
 .navbar:hover {
@@ -39,7 +47,6 @@
 }
 
 #social-media-bar {
-    bottom: 0%;
-    margin-bottom: 20px;
+    padding-bottom: 6px;
 }
 
