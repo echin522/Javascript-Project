@@ -82,10 +82,10 @@ export class Game {
         document.querySelector("progress").style.display = "none";
         document.querySelector("#dmg-counter").style.display = "none";
         if (this.isWon()) {
-            finishingSound = new Audio("/resources/assets/no_maidens.mp3");
+            finishingSound = new Audio("resources/assets/no_maidens.mp3");
             screen.innerHTML = "You Win!";
         } else {
-            finishingSound = new Audio("/resources/assets/skill_issue.mp3");
+            finishingSound = new Audio("resources/assets/skill_issue.mp3");
             screen.innerHTML = "You Lose....";
         }
         finishingSound.play();
