@@ -3,14 +3,49 @@ import { AnimationMixer } from "three";
 import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 
 export class Game {
-    constructor(timer, playerHealth, enemyHealth) {
+    constructor(timer, phrase, player, enemy) {
         this.models = [];
         this.timer = timer;
-        this.player = new Character(">:)", playerHealth);
-        this.enemy = new Character(":)", enemyHealth);
+        this.phrase = phrase;
+        this.player = player;
+        this.enemy = enemy;
+        this.allowedWords = {};
+        document.getElementById("cursor").style = "height: 80px; width: 80px";
+        document.getElementById("cursor-message").innerHTML += "Click and<br>Scream";
+    }
+    
+    updateAllowedWords() {
+        this.phrase.forEach(word => {
+            this.allowedWords[word] = word.length;
+        });
+    }
+    
+    updatePhrase(phrase) {
+        this.phrase = phrase;
+    }
+    
+    damageEnemy(phrase) {
+        console.log(phrase)
+        let dmg = 0;
+        // Calculate damage based on number of valid words and their length
+        phrase.forEach(word => {
+            if (this.allowedWords[word]) dmg += this.allowedWords[word];
+        });
+        this.player.punch(this.enemy, dmg);
+    }
+    
+    start() {
+        var startTimer = setInterval(() => {
+            let cursorTimer = document.getElementById("cursor-timer")
+            cursorTimer.innerHTML = this.timer + "s";
+            if (--this.timer < 0) {
+                window.clearInterval(startTimer);
+                this.endGame();
+            }
+        }, 1000);
     }
 
-    isOver() {
+    over() {
         if (this.timer === 0 || this.isWon()) {
             return true;
         }
@@ -19,18 +54,27 @@ export class Game {
 
     isWon() {
         if (this.enemy.health === 0) {
+            console.log("pog you won")
             return true;
+        }
+    }
+
+    endGame(scene) {
+        if (this.isWon) {
+            scene.remove(scene.getObjectByName(player.character));
+            scene.remove(scene.getObjectByName(enemy.character));
         }
     }
 }
 
 export class Character {
-    constructor(scene, model, health) {
+    constructor(scene, name, health) {
         this.scene = scene;
-        this.model = model;
+        this.model = name;
+        this.character = name;
         this.health = health;
         this.clock = new THREE.Clock();
-        this.character = model;
+        this.counterSFX = new Audio('/resources/assets/counter.mp3')
     }
 
     takeDamage(dmg) {
@@ -38,7 +82,11 @@ export class Character {
     }
 
     punch(enemy, dmg) {
-        this.punchAnimation();
+        this.counterSFX.play();
+        document.querySelector("#dmg-counter").innerHTML = dmg;
+        document.querySelector("#dmg-counter").style.display = "inline";
+        document.querySelector("#dmg-counter").style.fontSize = 40 + (5 * dmg) + "px";
+        console.log(`dealt ${dmg} damage!`)
         enemy.takeDamage(dmg);
     }
 
@@ -82,6 +130,6 @@ export class Character {
     }
 }
 
-const easyGame = (30, 20);
-const normalGame = (30, 50);
-const hardGame = (40, 100);
+// const easyGame = (30, 20);
+// const normalGame = (30, 50);
+// const hardGame = (40, 100);

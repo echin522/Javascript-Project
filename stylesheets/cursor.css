@@ -1,0 +1,50 @@
+@font-face {
+	font-family: 'striveFont';
+    src: url("/resources/assets/strive_font.otf") format("opentype");
+    font-family: 'genshinFont';
+    src: url("/resources/assets/genshin_font.ttf") format("opentype");
+	font-family: 'doomFont';
+    src: url("/resources/assets/doom_font.ttf") format("opentype");
+	font-family: 'codFont';
+    src: url("/resources/assets/cod_font.otf") format("opentype");
+}
+
+#cursor {
+    font-family: striveFont;
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    background-color: maroon;
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    text-align: center;
+}
+
+#cursor:hover {
+    background-color: none;
+    border: none;
+    display: none;
+}
+
+#cursor-timer {
+    font-size: 16px;
+}
+
+#dmg-counter {
+    display: none;
+    font-family: striveFont;
+    font-style: italic;
+    text-align: right;
+    font-size: 50px;
+    color: maroon;
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    top: 35%;
+}

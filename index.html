@@ -3,7 +3,7 @@
 
   	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+		<link rel="icon" type="image/png" href="/resources/assets/heh.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<script type="importmap">
@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="/stylesheets/reset.css" />
 		<link rel="stylesheet" href="/stylesheets/navbar.css" />
 		<link rel="stylesheet" href="/stylesheets/menu.css" />
+		<link rel="stylesheet" href="/stylesheets/cursor.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 		
@@ -25,15 +26,21 @@
 	</head>
 	
 	<body style="-webkit-font-smoothing: antialiased">
+		<!-- <div id="cover"></div> -->
 		<canvas id="background"></canvas>
+		<div id="pause-menu">Paused</div>
+		<div id="dmg-counter">test</div>
+		<div id="cursor"><br>
+			<span id="cursor-timer"></span>
+			<span id="cursor-message"></span>
+		</div>
 		<script type="module" src="/scripts/scene.js"></script>
 		
-		<nav class="navbar" id="gameplay-bar">
+		<nav class="navbar hide-before-start" id="gameplay-bar">
 			<li id="music">
-				<!-- <audio controls autoplay src="/resources/assets/Sols_Theme.mp3"></audio> -->
 				<i class="icon fa-solid fa-music fa-2x"></audio></i>
 			</li>
-			<li><i class="icon fa-solid fa-volume-high fa-2x"></i></li>
+			<li id="sound"><i class="icon fa-solid fa-volume-high fa-2x"></i></li>
 			<li id="pause"><i class="icon fa-solid fa-pause fa-2x"></i></li>
 		</nav>
 		
@@ -43,21 +50,28 @@
 			<P><span>M</span>ENACINGLY</P>
 		</div>
 		
-		<div id="game-menus">
+		<div id="game-menus" class="hide-before-start">
 			<div id="enemy-menu" class="menu">
 				<ul class="instructions">
 					<li>Enemy Settings</li>
-					<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex atque et sint saepe provident suscipit?</li>
+					<li>There is currently only one difficulty for this game</li>
+					<li>
+						The enemy begins with 200 health. The three words you chose for your "punch phrase" are the only ones you will be allowed to use for this game.<br><br>
+						
+					</li>
+					<li>Good Luck</li>
 				</ul>
 			</div>
 			
-			<div id="player-menu" class="menu">
+			<div id="player-menu" class="menu hide-before-start">
 				<ul class="instructions">
 					<li>Instructions</li>
-					<li>The enemy has severely underestimated you. <br><br>
+					<li>
+						The enemy has severely underestimated you. <br><br>
 						they will allow you to punch them until you run out of strength. <br><br>
-						Your punches are powered by your voice. When you are ready, click anywhere in this window to register your voice.
+						Your punches are powered by your voice and the length of your words. When you are ready, click anywhere in this window to register three words of choice. <br><br>
 					</li>
+					<br><br><br>
 					<li>Confirm your punch - phrase</li>
 					<li id="punchphrase"></li>
 					<li style="display: flex; align-items: center; justify-content: space-evenly;">

@@ -1,7 +1,8 @@
 class AudioControl {
 
     constructor () {
-        this.result = "";
+        this.words = "";
+        this.recognition;
         this.init();
     }
 
@@ -15,25 +16,18 @@ class AudioControl {
         let that = this;
 
         recognition.onstart = function() {
-            console.log("Now listening to audio")
+            console.log("Speech recognition has started")
         }
 
         recognition.onresult = function(e) {
-            let result = e.results[0][0].transcript;
-            console.log(result);
-            that.getResult();
-            document.querySelector("#punchphrase").innerHTML = result.split(" ")[0];
-            var confidence = e.results[0][0].confidence;
+            console.log("Speech recognition has ended");
+            that.words = e.results[0][0].transcript;
         }
 
-        // Output the users words once they've finished screaming
-        recognition.addEventListener('result', (e) => {
-            console.log("Speech recognition has ended");
-        });
-        recognition.start()
+        this.recognition = recognition
     }
 
     getResult() {
-        console.log("it worked poggers")
+        return this.words;
     }
 }
