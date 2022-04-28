@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { DirectionalLight } from "three";
 import { OrbitControls } from 'OrbitControls';
 import { Character, Game } from "./game.js"
-import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
-import Stats from "../node_modules/three/examples/jsm/libs/stats.module.js";
+import { GLTFLoader } from "../resources/nodes/GLTFLoader.js";
+import Stats from "../resources/nodes/stats.module.js";
 
 // Setup up some constants
 const clock = new THREE.Clock();
