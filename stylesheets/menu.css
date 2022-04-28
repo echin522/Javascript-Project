@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'striveFont';
-    src: url("/resources/assets/strive_font.otf") format("opentype");
+    src: url("../resources/assets/strive_font.otf") format("opentype");
 }
 
 body.B {
