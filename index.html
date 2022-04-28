@@ -3,9 +3,8 @@
 
   	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/png" href="/resources/assets/heh.png" />
+		<link rel="icon" type="image/png" href="./resources/assets/heh.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<script type="importmap">
 			{
 				"imports": {
@@ -14,20 +13,18 @@
 				}
 			}
 		</script>
-		
-		<link rel="stylesheet" href="/stylesheets/reset.css" />
-		<link rel="stylesheet" href="/stylesheets/navbar.css" />
-		<link rel="stylesheet" href="/stylesheets/menu.css" />
-		<link rel="stylesheet" href="/stylesheets/cursor.css" />
+		<link rel="stylesheet" href="./stylesheets/reset.css" />
+		<link rel="stylesheet" href="./stylesheets/navbar.css" />
+		<link rel="stylesheet" href="./stylesheets/menu.css" />
+		<link rel="stylesheet" href="./stylesheets/cursor.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 		
 		<title>Standing Menacingly</title>
 	</head>
 	
 	<body style="-webkit-font-smoothing: antialiased">
-		<!-- <div id="cover"></div> -->
 		<canvas id="background"></canvas>
-		<progress id="health-bar" value="70" max="100"></progress>
+		<progress id="health-bar" value="0" max="100"></progress>
 		<div id="pause-menu">Paused</div>
 		<div id="dmg-counter">test</div>
 		<div id="cursor"><br>
@@ -95,8 +92,6 @@
 		</nav>
 
 		<script src="/scripts/audio-control.js"></script>
-		<!-- <script src="/scripts/audio-control.js"></script> -->
-
 	</body>
 </html>
 	

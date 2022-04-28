@@ -3,16 +3,18 @@ import { AnimationMixer } from "three";
 import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 
 export class Game {
-    constructor(timer, phrase, player, enemy) {
+    constructor(timer, phrase, player, enemy, health) {
+        // Dude how did this even happen
         this.models = [];
         this.timer = timer;
         this.phrase = phrase;
         this.player = player;
         this.enemy = enemy;
+        this.enemyHealth = 200;
         this.healthBar = document.getElementById("health-bar");
         this.allowedWords = {};
         document.getElementById("cursor").style = "height: 80px; width: 80px; display: inline";
-        document.getElementById("cursor-message").innerHTML += "Click and<br>Scream";
+        document.querySelector("progress").style = "display: inline";
     }
     
     updateAllowedWords() {
@@ -29,49 +31,54 @@ export class Game {
         let dmg = 0;
         // Calculate damage based on number of valid words and their length
         phrase.forEach(word => {
-            console.log(word)
             if (this.allowedWords[word]) dmg += this.allowedWords[word];
         });
         return dmg
     }
 
     damageEnemy(dmg) {
-        // console.log(phrase)
         this.player.punch(this.enemy, dmg);
         this.healthBar.value -= dmg
     }
     
     start() {
+        this.healthBar.value = this.enemyHealth;
+        this.healthBar.max = this.enemyHealth;
         var startTimer = setInterval(() => {
-            this.healthBar.value = this.enemy.health;
-            this.healthBar.max = this.enemy.health;
             let cursorTimer = document.getElementById("cursor-timer")
             cursorTimer.innerHTML = this.timer + "s";
-            if (--this.timer < 0) {
+            if (--this.timer === 0) {
+                document.querySelector("#dmg-counter").innerHTML = "!!!!!"
+                cursorTimer.innerHTML = "";
                 window.clearInterval(startTimer);
-                this.endGame();
             }
         }, 1000);
     }
 
     over() {
-        if (this.timer === 0 || this.isWon()) {
+        if (this.timer < 1 || this.isWon()) {
             return true;
         }
         return false;
     }
 
     isWon() {
-        if (this.enemy.health === 0) {
-            console.log("pog you won")
+        if (this.enemyHealth === 0) {
             return true;
         }
     }
 
     endGame(scene) {
-        if (this.isWon) {
-            scene.remove(scene.getObjectByName(player.character));
-            scene.remove(scene.getObjectByName(enemy.character));
+        console.log("poggers its over")
+        while (scene.children.length) {
+            scene.remove(scene.children[0]);
+        }
+        let screen = document.getElementById("pause-menu");
+        screen.style.display = "flex"
+        if (this.isWon()) {
+            screen.innerHTML = "You Win!"
+        } else {
+            screen.innerHTML = "You Lose..."
         }
     }
 }
@@ -83,7 +90,7 @@ export class Character {
         this.character = name;
         this.health = health;
         this.clock = new THREE.Clock();
-        this.counterSFX = new Audio('/resources/assets/counter.mp3')
+        this.counterSFX = new Audio('../resources/assets/counter.mp3')
     }
 
     takeDamage(dmg) {
@@ -95,7 +102,6 @@ export class Character {
         document.querySelector("#dmg-counter").innerHTML = dmg;
         document.querySelector("#dmg-counter").style.display = "inline";
         document.querySelector("#dmg-counter").style.fontSize = 40 + (5 * dmg) + "px";
-        console.log(`dealt ${dmg} damage!`)
         enemy.takeDamage(dmg);
     }
 
@@ -105,7 +111,7 @@ export class Character {
 
     loadModel(scene, character, scale, pos, rot) {
         const loader = new GLTFLoader();
-        loader.setPath("/resources/models/")
+        loader.setPath("../resources/models/")
         
         loader.load(`${character}/idle.glb`, function (gltf) {
             let model = gltf.scene;
@@ -120,7 +126,3 @@ export class Character {
         })
     }
 }
-
-// const easyGame = (30, 20);
-// const normalGame = (30, 50);
-// const hardGame = (40, 100);

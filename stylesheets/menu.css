@@ -11,7 +11,6 @@ body.B {
 #title {
     display: flex;
     padding-top: 25%;
-    /* align-items: center; */
     flex-direction: column;
     align-items: center;
 }
@@ -111,10 +110,6 @@ button:hover {
     cursor: pointer;
 }
 
-#punch-phrase {
-    /* font-family: "codFont"; */
-}
-
 .hide-before-start {
     display: none;
 }
@@ -141,13 +136,12 @@ button:hover {
 }
 
 #pause-menu {
-    font-family: striveFont;
-    text-align: center;
-    font-size: 40vw;
     display: none;
+    font-family: striveFont;
+    font-size: 10vw;
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-color: white;
     opacity: 0.5;
 }
