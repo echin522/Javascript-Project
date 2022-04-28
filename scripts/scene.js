@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { DirectionalLight } from "three";
-import { OrbitControls } from 'OrbitControls';
+import { OrbitControls }from 'OrbitControls';
 import { Character, Game } from "./game.js"
 import { GLTFLoader } from "./GLTFLoader.js";
 import Stats from "./stats.module.js";
@@ -150,7 +150,7 @@ export class LoadScene {
 
 
 const loader = new GLTFLoader();
-loader.setPath("/resources/models/")
+loader.setPath("resources/models/")
 
 function render() {
     renderer.render(scene, camera);

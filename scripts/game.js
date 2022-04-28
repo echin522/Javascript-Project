@@ -100,7 +100,7 @@ export class Character {
         this.character = name;
         this.health = health;
         this.clock = new THREE.Clock();
-        this.counterSFX = new Audio('/resources/assets/counter.mp3')
+        this.counterSFX = new Audio('resources/assets/counter.mp3')
     }
 
     takeDamage(dmg) {
@@ -121,7 +121,7 @@ export class Character {
 
     loadModel(scene, character, scale, pos, rot) {
         const loader = new GLTFLoader();
-        loader.setPath("/resources/models/")
+        loader.setPath("resources/models/")
         
         loader.load(`${character}/idle.glb`, function (gltf) {
             let model = gltf.scene;
