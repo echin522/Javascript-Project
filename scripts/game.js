@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "../resources/nodes/GLTFLoader.js";
+import { GLTFLoader } from "/resources/nodes/GLTFLoader.js";
 
 export class Game {
     constructor(timer, phrase, player, enemy, enemyHealth) {
@@ -82,11 +82,11 @@ export class Game {
         document.querySelector("progress").style.display = "none";
         document.querySelector("#dmg-counter").style.display = "none";
         if (this.isWon()) {
-            finishingSound = new Audio("../resources/assets/no_maidens.mp3");
+            finishingSound = new Audio("/resources/assets/no_maidens.mp3");
             screen.innerHTML = "You Win!";
         } else {
-            finishingSound = new Audio("../resources/assets/skill_issue.mp3");
-            screen.innerHTML = "You Lose...";
+            finishingSound = new Audio("/resources/assets/skill_issue.mp3");
+            screen.innerHTML = "You Lose....";
         }
         finishingSound.play();
         
@@ -100,7 +100,7 @@ export class Character {
         this.character = name;
         this.health = health;
         this.clock = new THREE.Clock();
-        this.counterSFX = new Audio('../resources/assets/counter.mp3')
+        this.counterSFX = new Audio('/resources/assets/counter.mp3')
     }
 
     takeDamage(dmg) {
@@ -121,7 +121,7 @@ export class Character {
 
     loadModel(scene, character, scale, pos, rot) {
         const loader = new GLTFLoader();
-        loader.setPath("../resources/models/")
+        loader.setPath("/resources/models/")
         
         loader.load(`${character}/idle.glb`, function (gltf) {
             let model = gltf.scene;

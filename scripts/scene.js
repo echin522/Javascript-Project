@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { DirectionalLight } from "three";
 import { OrbitControls } from 'OrbitControls';
 import { Character, Game } from "./game.js"
-import { GLTFLoader } from "../resources/nodes/GLTFLoader.js";
-import Stats from "../resources/nodes/stats.module.js";
+import { GLTFLoader } from "/resources/nodes/GLTFLoader.js";
+import Stats from "/resources/nodes/stats.module.js";
 
 // Setup up some constants
 const clock = new THREE.Clock();
@@ -150,7 +150,7 @@ export class LoadScene {
 
 
 const loader = new GLTFLoader();
-loader.setPath("../resources/models/")
+loader.setPath("/resources/models/")
 
 function render() {
     renderer.render(scene, camera);
@@ -180,7 +180,7 @@ let isMuted = false;
 let gamePaused = false;
 let musicPaused = false;
 let logPhrase = new AudioControl();
-let themeSong = new Audio('../resources/assets/Sols_Theme.mp3');
+let themeSong = new Audio('/resources/assets/Sols_Theme.mp3');
 let pauseButton = document.querySelector("#pause");
 let muteButton = document.querySelector("#sound");
 let musicButton = document.querySelector("#music");
