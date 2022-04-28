@@ -31,7 +31,7 @@
 			<span id="cursor-timer"></span>
 			<span id="cursor-message"></span>
 		</div>
-		<script type="module" src="/scripts/scene.js"></script>
+		<script type="module" src="./scripts/scene.js"></script>
 		
 		<nav class="navbar hide-before-start" id="gameplay-bar">
 			<li id="music">
@@ -51,12 +51,21 @@
 			<div id="enemy-menu" class="menu">
 				<ul class="instructions">
 					<li>Enemy Settings</li>
-					<li>There is currently only one difficulty for this game</li>
+					<li>Health - 
+						<span id="health-slider-num">300</span>
+						<input type="range" min="10" max="1000" value="300" class="slider" id="health-slider"></li>
+					<li>Time - 
+						<span id="timer-slider-num">10</span> s
+						<input type="range" min="5" max="59" value="10" class="slider" id="timer-slider">
+					</li>
 					<li>
-						The enemy begins with 200 health. The three words you chose for your "punch phrase" are the only ones you will be allowed to use for this game.<br><br>
-						
+						The three words you chose for your "punch phrase" are the only ones you will be allowed to use for this game.<br>
+						Strike fast, but don't get sloppy. This API can't understand your gibberish<br>
 					</li>
 					<li>Good Luck</li>
+					<li>
+						<button id="start-game-button">BEGIN</button>
+					</li>
 				</ul>
 			</div>
 			
@@ -91,7 +100,7 @@
 			</a>
 		</nav>
 
-		<script src="/scripts/audio-control.js"></script>
+		<script src="./scripts/audio-control.js"></script>
 	</body>
 </html>
 	

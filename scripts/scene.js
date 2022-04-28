@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { DirectionalLight } from "three";
 import { OrbitControls } from 'OrbitControls';
 import { Character, Game } from "./game.js"
-import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
-import Stats from "/node_modules/three/examples/jsm/libs/stats.module.js";
+import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import Stats from "../node_modules/three/examples/jsm/libs/stats.module.js";
 
 // Setup up some constants
 const clock = new THREE.Clock();
@@ -13,7 +13,8 @@ const renderer = new THREE.WebGLRenderer({
     alpha: true,
     canvas: document.querySelector('#background'),
 });
-let controls
+let lights = [];
+let controls;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 // scene.fog = new THREE.FogExp2(0xDFCDCA, .1);
@@ -50,7 +51,6 @@ export class LoadScene {
         
         // Setup the lighting environments
         const hemiLight = new THREE.HemisphereLight(0xffeeb1, 0xF1CAC4, .5);
-        scene.add(hemiLight);
         
         const keyLight = new DirectionalLight(0xffffff, 1.0);
         keyLight.position.set(0, 30 , 0);
@@ -58,13 +58,16 @@ export class LoadScene {
         fillLight.position.set(0, 30, 0);
         const backLight = new DirectionalLight(0xffffff, 1.0);
         backLight.position.set(0, 30, 0).normalize();
-        scene.add(keyLight, fillLight, backLight);
         
         const keyLightHelper = new THREE.PointLightHelper(keyLight);
         const fillLightHelper = new THREE.PointLightHelper(fillLight);
         const backLightHelper = new THREE.PointLightHelper(backLight);
         scene.add(keyLightHelper, fillLightHelper, backLightHelper);
+        scene.add(keyLight, fillLight, backLight);
+        scene.add(hemiLight);
         
+        lights = [keyLightHelper, fillLightHelper, backLightHelper, keyLight, fillLight, backLight, hemiLight];
+
         ////////////////////////////////////////////////////////////////////////////////
         
         // Setup camera controls and grid for testing
@@ -183,11 +186,15 @@ let muteButton = document.querySelector("#sound");
 let musicButton = document.querySelector("#music");
 let confirmVoiceButton = document.querySelector("#affirmative");
 let redoVoiceButton = document.querySelector("#negative");
-let goButton = document.querySelector("#enemy-menu")
+let goButton = document.querySelector("#start-game-button")
 let preStartItems = document.querySelectorAll(".hide-before-start");
 let menus = document.querySelectorAll(".menu");
 let cursor = document.getElementById("cursor");
-let pauseMenu = document.querySelector("#pause-menu")
+let pauseMenu = document.querySelector("#pause-menu");
+let healthSlider = document.querySelector("#health-slider");
+let timerSlider = document.querySelector("#timer-slider");
+let gameTime = 10;
+let enemyHealth = 200;
 let game;
 let gamePhase = 0;
 let playerModel;
@@ -210,12 +217,11 @@ function pause() {
     }
 }
 
-function loadAnimation(model, anim, startPos, rotation, scale, add, once) {
+function loadAnimation(model, anim, startPos, rotation, scale, add, once, actionName) {
     loader.load(`${model}/${anim}.gltf`, function (gltf) {
         let newAnim = gltf.scene;
         newAnim.name = `${model}_${anim}`;
         newAnim.scale.setScalar(scale);
-        newAnim.traverse(c => c.castShadow = true);
         newAnim.traverse(c => c.castShadow = true);
         newAnim.position.setX(startPos[0]);
         newAnim.position.setY(startPos[1]);
@@ -237,7 +243,7 @@ function startGame() {
     enemyModel.position.setX(2)
     enemyModel.position.setZ(4.5)
     enemyModel.rotateX(.08)
-    loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, true);
+    loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, false);
     document.querySelector("#title").style.display = 'none';
     document.querySelector("#game-menus").style.display = 'none';
     menus.forEach (menu => {menu.style.display = 'none'});
@@ -313,9 +319,17 @@ muteButton.addEventListener('click', () => {
 })
 
 themeSong.addEventListener("ended", (e) => {
-    this.currentTime = 0;
-    this.play();
+    themeSong.currentTime = 0;
+    themeSong.play();
 }, false);
+
+healthSlider.oninput = function() {
+    document.querySelector("#health-slider-num").innerHTML = healthSlider.value;
+}
+
+timerSlider.oninput = function() {
+    document.querySelector("#timer-slider-num").innerHTML = timerSlider.value;
+}
 
 window.addEventListener("click", () => {
     if (!menuLoaded) {
@@ -338,7 +352,7 @@ window.addEventListener("click", () => {
         } else if (!punchLoop) {
             logPhrase.recognition.start();
             scene.remove(scene.children[scene.children.length - 1]);
-            loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, true);
+            loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, false);
             controls.reset();
             punchLoop = true;
         }
@@ -357,8 +371,40 @@ logPhrase.recognition.addEventListener("result", (e) => {
         action.play();
         if (game.over()) {
             gamePhase += 1; // Phase 4
-            pause();
+            themeSong.volume = 0.3;
+            pauseMenu.style.display = "inline"
             game.endGame(scene);
+            scene.add(...lights);
+            if (game.isWon()) {
+                // loadAnimation("jotaro", "win", [0, 0, 0], [0, 0, 0], 3, true, false);
+                loader.load(`jotaro/win.gltf`, function (gltf) {
+                    let newAnim = gltf.scene;
+                    newAnim.position.setZ(-6);
+                    newAnim.scale.setScalar(2.2);
+                    camera.position.setY(14);
+                    newAnim.traverse(c => c.castShadow = true);
+                    let mixer = new THREE.AnimationMixer(gltf.scene);
+                    let action = mixer.clipAction(gltf.animations[0]);
+                    scene.add(newAnim);
+                    mixers.push(mixer);
+                    action.play();
+                });
+            } else {
+                // loadAnimation("jotaro", "lose", [0, 0, 0], [0, 0, 0], 3, true, false);
+                loader.load(`jotaro/lose.gltf`, function (gltf) {
+                    let newAnim = gltf.scene;
+                    newAnim.scale.setScalar(3);
+                    newAnim.traverse(c => c.castShadow = true);
+                    mixer = new THREE.AnimationMixer(gltf.scene);
+                    let action = mixer.clipAction(gltf.animations[0]);
+                    scene.add(newAnim);
+                    mixers.push(mixer);
+                    action.play();
+                });
+            }
+            pauseMenu.addEventListener("click", () => {
+                location.reload();
+            });
         }
     }
 });
@@ -386,7 +432,9 @@ confirmVoiceButton.addEventListener("click", () => {
 // Phase 2
 goButton.addEventListener("click", () => {
     gamePhase += 1;
-    game = new Game(30, punchPhrase, player, enemy);
+    enemyHealth = healthSlider.value;
+    gameTime = timerSlider.value;
+    game = new Game(gameTime, punchPhrase, player, enemy, enemyHealth);
     game.updateAllowedWords();
     resetCamera();
     controls.reset();

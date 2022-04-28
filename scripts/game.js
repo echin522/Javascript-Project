@@ -3,14 +3,14 @@ import { AnimationMixer } from "three";
 import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 
 export class Game {
-    constructor(timer, phrase, player, enemy, health) {
+    constructor(timer, phrase, player, enemy, enemyHealth) {
         // Dude how did this even happen
         this.models = [];
         this.timer = timer;
         this.phrase = phrase;
         this.player = player;
         this.enemy = enemy;
-        this.enemyHealth = 200;
+        this.enemyHealth = enemyHealth;
         this.healthBar = document.getElementById("health-bar");
         this.allowedWords = {};
         document.getElementById("cursor").style = "height: 80px; width: 80px; display: inline";
@@ -38,6 +38,7 @@ export class Game {
 
     damageEnemy(dmg) {
         this.player.punch(this.enemy, dmg);
+        this.enemyHealth -= dmg
         this.healthBar.value -= dmg
     }
     
@@ -63,23 +64,33 @@ export class Game {
     }
 
     isWon() {
-        if (this.enemyHealth === 0) {
+        if (this.enemyHealth <= 0) {
             return true;
+        } else {
+            return false;
         }
     }
 
     endGame(scene) {
-        console.log("poggers its over")
+        let finishingSound;
         while (scene.children.length) {
             scene.remove(scene.children[0]);
         }
+        document.querySelector("#cursor-timer").style.display = "none"
         let screen = document.getElementById("pause-menu");
         screen.style.display = "flex"
+        document.querySelector("#dmg-counter").style.display = "none";
+        document.querySelector("progress").style.display = "none";
+        document.querySelector("#dmg-counter").style.display = "none";
         if (this.isWon()) {
-            screen.innerHTML = "You Win!"
+            finishingSound = new Audio("../resources/assets/no_maidens.mp3");
+            screen.innerHTML = "You Win!";
         } else {
-            screen.innerHTML = "You Lose..."
+            finishingSound = new Audio("../resources/assets/skill_issue.mp3");
+            screen.innerHTML = "You Lose...";
         }
+        finishingSound.play();
+        
     }
 }
 

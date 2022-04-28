@@ -8,14 +8,16 @@
 #cursor {
     display: none;
     font-family: striveFont;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: white;
     color: maroon;
     font-size: 50px;
     position: absolute;
     background-color: none;
     width: 10vw;
     height: 10vh;
-    top: 14vh;
-    right: 1vw;
+    top: 25vh;
+    right: 3vw;
     box-sizing: border-box;
     pointer-events: none;
     text-align: center;
