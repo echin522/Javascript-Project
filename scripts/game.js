@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "/resources/nodes/GLTFLoader.js";
+import { GLTFLoader } from "./GLTFLoader.js";
 
 export class Game {
     constructor(timer, phrase, player, enemy, enemyHealth) {
