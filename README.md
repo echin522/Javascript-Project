@@ -1,33 +1,13 @@
 # Background #
 
-Standing Menacingly (tentative) is my take on Punchout!! for the Nintendo Entertainment System. It blends elements from Japanese pop culture icons such as Jojo's Bizarre Adventure to bring a creative spin on the classic game by only allowing the user to play with their voice. 
+Standing Menacingly (tentative) is my take on Punchout!! for the Nintendo Entertainment System. It blends elements from Japanese pop culture icons such as Jojo's Bizarre Adventure to bring a creative spin on the classic game by allowing the user to play with their voice. 
 
 The original game is simple and contains two objects as it's main focus - the player and their opponent. The player must punch an opponent boxer and knock them out as quickly as possible.
 
-There will be four difficulty settings for the opponent, each with different time and health parameters. The user wins if they are able to knock the opponent out within the time limit and loses otherwise. Further details will be shared in the following sections.
+
+# Link to Live Version #
 
 
-# Functionality & MVP #
-
-Game setup
-- The user will speak their "punch phrase" (PP) into the microphone
-- Upon registering and confirming their desired PP, they may choose a difficulty setting
-- The game officially begins once they say their PP again
-
-Core gameplay
-- Each time the player calls their PP, it will register as a single punch. Constant screaming will not count!
-- Each punch will deal damage to the enemy
-- Once the enemy runs out of health, the player wins!
-- If the timer runs out before the enemy is KO'd, the player loses
-
-Options (not voice controlled)
-- Universal
-    - Mute music and/or SFX
-    - Instructions sheet (initially hidden)
-- Start menu
-    - Difficulty setting
-- During gameplay
-    - Pause menu
 
 
 # Wireframe #
