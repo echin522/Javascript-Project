@@ -9,8 +9,9 @@ export class Game {
         this.phrase = phrase;
         this.player = player;
         this.enemy = enemy;
+        this.healthBar = document.getElementById("health-bar");
         this.allowedWords = {};
-        document.getElementById("cursor").style = "height: 80px; width: 80px";
+        document.getElementById("cursor").style = "height: 80px; width: 80px; display: inline";
         document.getElementById("cursor-message").innerHTML += "Click and<br>Scream";
     }
     
@@ -24,18 +25,26 @@ export class Game {
         this.phrase = phrase;
     }
     
-    damageEnemy(phrase) {
-        console.log(phrase)
+    calculateDamage(phrase) {
         let dmg = 0;
         // Calculate damage based on number of valid words and their length
         phrase.forEach(word => {
+            console.log(word)
             if (this.allowedWords[word]) dmg += this.allowedWords[word];
         });
+        return dmg
+    }
+
+    damageEnemy(dmg) {
+        // console.log(phrase)
         this.player.punch(this.enemy, dmg);
+        this.healthBar.value -= dmg
     }
     
     start() {
         var startTimer = setInterval(() => {
+            this.healthBar.value = this.enemy.health;
+            this.healthBar.max = this.enemy.health;
             let cursorTimer = document.getElementById("cursor-timer")
             cursorTimer.innerHTML = this.timer + "s";
             if (--this.timer < 0) {
@@ -108,24 +117,6 @@ export class Character {
             model.setRotationFromEuler(new THREE.Euler( rot[0], rot[1], rot[2], 'XYZ' ))
             model.name = character;
             scene.add(model);
-
-            // const mixer = new AnimationMixer(model);
-            // const clips = model.animations;
-            // const clip = THREE.AnimationClip.findByName(clips, 'dance');
-            // const action = mixer.clipAction(clip);
-            // action.play();
-        })
-    }
-
-    loadAnimations(gltf, movement) {
-        const anim = new GLTFLoader();
-        anim.setPath("resources/models/");
-        
-        anim.load("jotaro/punchCombo.gltf", function (anim) {
-            console.log("walk loaded");
-            const mixer = new THREE.AnimationMixer(anim.scene);
-            console.log(mixer)
-            mixer.clipAction(anim.animations[0]);
         })
     }
 }

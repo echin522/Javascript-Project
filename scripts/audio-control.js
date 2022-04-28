@@ -7,8 +7,6 @@ class AudioControl {
     }
 
     init() {
-        const canvas = document.querySelector("button");
-
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         const recognition = new window.SpeechRecognition();

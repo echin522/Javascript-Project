@@ -38,7 +38,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	background-color: black;
 	line-height: 1;
-	cursor: none;
+	cursor: default;
 }
 ol, ul {
 	list-style: none;

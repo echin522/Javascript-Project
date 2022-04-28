@@ -194,6 +194,7 @@ function animate() {
 
 // Reload everything because I'm incompetent and don't know how to assign
 // animations to generic models. Will refactor one day
+let punchLoop = 1;
 let menuLoaded = false;
 let isMuted = false;
 let gamePaused = false;
@@ -222,35 +223,35 @@ function pause() {
         themeSong.volume = 0.3;
         pauseMenu.style.display = "inline"
         cursor.style.display = "none"
-        document.querySelector("body").style.cursor = "default"
+        // document.querySelector("body").style.cursor = "default"
         gamePaused = true;
     } else {
         themeSong.volume = 1;
         pauseMenu.style.display = "none"
         cursor.style.display = "inline"
-        document.querySelector("body").style.cursor = "none"
+        // document.querySelector("body").style.cursor = "none"
         gamePaused = false;
     }
 }
 
-function loadAnimation(model, anim) {
+function loadAnimation(model, anim, startPos, rotation, scale, add, once) {
     loader.load(`${model}/${anim}.gltf`, function (gltf) {
-        let model = gltf.scene;
-        model.scale.setScalar(4);
-        model.traverse(c => c.castShadow = true);
-        model.traverse(c => c.castShadow = true);
-            model.position.setX(-2);
-            model.position.setY(0);
-            model.position.setZ(7);
-            model.setRotationFromEuler(new THREE.Euler( 0, 2.1, 0, 'XYZ' ));
-        // const anim = new GLTFLoader();
-        // anim.load("/resources/models/animations/walk.gltf", function (anim) {
-            mixer = new THREE.AnimationMixer(gltf.scene);
-            // console.log(mixer)
-            action = mixer.clipAction(gltf.animations[0]);
-            mixers.push(mixer);
-        // })
-        scene.add(model)
+        let newAnim = gltf.scene;
+        newAnim.name = `${model}_${anim}`;
+        console.log(newAnim.name);
+        newAnim.scale.setScalar(scale);
+        newAnim.traverse(c => c.castShadow = true);
+        newAnim.traverse(c => c.castShadow = true);
+        newAnim.position.setX(startPos[0]);
+        newAnim.position.setY(startPos[1]);
+        newAnim.position.setZ(startPos[2]);
+        newAnim.setRotationFromEuler(new THREE.Euler( rotation[0], rotation[1], rotation[2], 'XYZ' ));
+        mixer = new THREE.AnimationMixer(gltf.scene);
+        console.log(mixer);
+        action = mixer.clipAction(gltf.animations[0]);
+        if (once) action.setLoop(THREE.LoopOnce);
+        if (add) scene.add(newAnim);
+        mixers.push(mixer);
     });
 }
 
@@ -263,7 +264,7 @@ function startGame() {
     enemyModel.position.setZ(4.5)
     enemyModel.rotateX(.08)
     // scene.remove(scene.getObjectByName(enemy.character));
-    loadAnimation("jotaro", "punchCombo");
+    loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, true);
     document.querySelector("#title").style.display = 'none';
     document.querySelector("#game-menus").style.display = 'none';
     menus.forEach (menu => {menu.style.display = 'none'});
@@ -346,15 +347,32 @@ themeSong.addEventListener("ended", (e) => {
 window.addEventListener("click", () => {
     if (!menuLoaded) {
         loadMenu();
-    } else if (gamePhase == 2) {
-        action.play();
+    } else if (gamePhase === 2) {
         logPhrase.recognition.start();
         document.getElementById("cursor-message").innerHTML = "";
         game.start();
         gamePhase += 1;
     } else if (gamePhase === 3) {
-        action.play();
-        logPhrase.recognition.start();
+        document.getElementById("cursor-message").innerHTML = "";
+        scene.remove(scene.getObjectByName("jotaro_punchCombo"));
+        switch (punchLoop) {
+            case 1:
+                // scene.remove(scene.getObjectByName("jotaro_punchCombo"));
+                scene.remove(scene.children[scene.children.length]);
+                console.log(scene.children.length);
+                loadAnimation("jotaro", "heavyPunch", [-2, 0, 7], [0, 2.1, 0], 4.3, true, true);
+                logPhrase.recognition.start();
+                punchLoop += 1;
+                console.log(punchLoop);
+            case 2:
+                // scene.remove(scene.getObjectByName("jotaro_heavyPunch"));
+                scene.remove(scene.children[scene.children.length]);
+                console.log(scene.children.length);
+                loadAnimation("jotaro", "punchCombo", [-2, 0, 7], [0, 2.1, 0], 4, true, true);
+                logPhrase.recognition.start();
+                punchLoop -= 1;
+                console.log(punchLoop);
+        }
     }
 });
 
@@ -364,9 +382,24 @@ logPhrase.recognition.addEventListener("result", (e) => {
         document.querySelector("#punchphrase").innerHTML = logPhrase.getResult().split(" ").slice(0, 3).join(" ") 
     } else if (gamePhase === 1) {
         game.updatePhrase(punchPhrase);
-    } else if (gamePhase > 2) {
-        game.damageEnemy(punchPhrase);
+    } else if (gamePhase === 3) {
+        let dmg = game.calculateDamage(punchPhrase)
+        // if (punchLoop === 1) {
+        //     game.damageEnemy(dmg);
+        //     for (let i = 0; i < dmg / 4; i++) {
+        //         console.log("playing")
+        //         action.play();
+        //     }
+        // } else {
+            game.damageEnemy(dmg);
+            action.play();
+        // }
+        if (game.over()) {
+            game.endGame();
+        }
         document.querySelector("#cursor-message").innerHTML = "<br><br>CLICK";
+    } else if (gamePhase === 4) {
+
     }
 });
 
@@ -402,10 +435,10 @@ goButton.addEventListener("click", () => {
 });
 
 
-window.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-});
+// window.addEventListener("mousemove", (e) => {
+//     cursor.style.left = e.clientX + "px";
+//     cursor.style.top = e.clientY + "px";
+// });
 
 // 4 fun
 

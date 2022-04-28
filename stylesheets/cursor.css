@@ -10,29 +10,27 @@
 }
 
 #cursor {
+    display: none;
     font-family: striveFont;
-    color: white;
-    font-size: 12px;
+    color: maroon;
+    font-size: 50px;
+    text-align: center;
     position: absolute;
-    background-color: maroon;
-    width: 20px;
-    height: 20px;
-    border: 2px solid grey;
+    background-color: none;
+    width: 75px;
+    height: 50px;
+    top: 1vh;
+    right: 0;
     box-sizing: border-box;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
     pointer-events: none;
     text-align: center;
 }
 
-#cursor:hover {
-    background-color: none;
-    border: none;
-    display: none;
-}
-
-#cursor-timer {
-    font-size: 16px;
+#health-bar {
+    transform: rotate(90deg);
+    color: maroon;
+    width: 40vw;
+    height: 3vh;
 }
 
 #dmg-counter {
