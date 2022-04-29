@@ -217,7 +217,7 @@ function pause() {
     }
 }
 
-function loadAnimation(model, anim, startPos, rotation, scale, add, once, actionName) {
+function loadAnimation(model, anim, startPos, rotation, scale, add, once) {
     loader.load(`${model}/${anim}.gltf`, function (gltf) {
         let newAnim = gltf.scene;
         newAnim.name = `${model}_${anim}`;
