@@ -5,7 +5,9 @@ Standing Menacingly (tentative) is my take on Punchout!! for the Nintendo Entert
 The original game is simple and contains two objects as it's main focus - the player and their opponent. The player must punch an opponent boxer and knock them out as quickly as possible.
 
 
-# ![Link to Project](https://echin522.github.io/Standing-Menacingly/) #
+# !Link to Project #
+
+[Standing Menacingly](https://echin522.github.io/Standing-Menacingly/)
 
 # Instructions #
 
