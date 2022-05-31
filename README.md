@@ -1,13 +1,11 @@
 # Background #
 
-Standing Menacingly (tentative) is my take on Punchout!! for the Nintendo Entertainment System. It blends elements from Japanese pop culture icons such as Jojo's Bizarre Adventure to bring a creative spin on the classic game by allowing the user to play with their voice. 
+Standing Menacingly is my take on Punchout!! for the Nintendo Entertainment System. It blends elements from Japanese pop culture icons such as Jojo's Bizarre Adventure to bring a creative spin on the classic game by allowing the user to play with their voice. 
 
 The original game is simple and contains two objects as it's main focus - the player and their opponent. The player must punch an opponent boxer and knock them out as quickly as possible.
 
 
-# !Link to Project #
-
-[Standing Menacingly](https://echin522.github.io/Standing-Menacingly/)
+# [Standing Menacingly](https://echin522.github.io/Standing-Menacingly/) #
 
 # Instructions #
 
