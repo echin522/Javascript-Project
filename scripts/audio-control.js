@@ -13,12 +13,12 @@ class AudioControl {
         recognition.intermResults = true;
         let that = this;
 
-        recognition.onstart = function() {
-            console.log("Speech recognition has started")
-        }
+        // recognition.onstart = function() {
+        //     console.log("Speech recognition has started")
+        // }
 
         recognition.onresult = function(e) {
-            console.log("Speech recognition has ended");
+            // console.log("Speech recognition has ended");
             that.words = e.results[0][0].transcript;
         }
 

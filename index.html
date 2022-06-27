@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  	<head>
+	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/png" href="./resources/assets/heh.png" />
+		<link rel="icon" type="image/png" href="./resources/assets/joHat.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script type="importmap">
 			{
@@ -34,9 +33,9 @@
 		<script type="module" src="./scripts/scene.js"></script>
 		
 		<nav class="navbar hide-before-start" id="gameplay-bar">
-			<li id="music">
+			<!-- <li id="music">
 				<i class="icon fa-solid fa-music fa-2x"></audio></i>
-			</li>
+			</li> -->
 			<li id="sound"><i class="icon fa-solid fa-volume-high fa-2x"></i></li>
 			<li id="pause"><i class="icon fa-solid fa-pause fa-2x"></i></li>
 		</nav>
@@ -59,8 +58,9 @@
 						<input type="range" min="5" max="59" value="10" class="slider" id="timer-slider">
 					</li>
 					<li>
-						The three words you chose for your "punch phrase" are the only ones you will be allowed to use for this game.<br>
-						Strike fast, but don't get sloppy. This API can't understand your gibberish<br>
+						Click anywhere on the screen to begin a "punch stream." The stream ends once you pause for a few seconds. Click again to begin another stream.<br><br>
+						Strike fast, but don't get sloppy.<br>
+						This API can't understand your gibberish<br>
 					</li>
 					<li>Good Luck</li>
 					<li>
@@ -73,12 +73,12 @@
 				<ul class="instructions">
 					<li>Instructions</li>
 					<li>
-						The enemy has severely underestimated you. <br><br>
-						they will allow you to punch them until you run out of strength. <br><br>
-						Your punches are powered by your voice and the length of your words. When you are ready, click anywhere in this window to register three words of choice. <br><br>
+						The enemy has severely underestimated you. They will allow you to punch them until you run out of strength. <br><br>
+						Your punches are powered by your voice! and the length of your words. The longer the word and the more times you say it, the more damage you do.<br><br>
+						When you are ready, click anywhere in this window and register up to three words of choice.<br><br>
 					</li>
-					<br><br><br>
-					<li>Confirm your punch - phrase</li>
+					<br><br>
+					<li>Confirm your punch-phrase</li>
 					<li id="punchphrase"></li>
 					<li style="display: flex; align-items: center; justify-content: space-evenly;">
 						<button id="affirmative">AFFIRMATIVE</button>

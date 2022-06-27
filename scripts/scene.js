@@ -77,7 +77,10 @@ export class LoadScene {
         controls.minPolarAngle = Math.PI / 4; // radians
         controls.maxPolarAngle = Math.PI / 3; // radians
         controls.minDistance= 0;
-        controls.maxDistance=100;
+        controls.maxDistance= 100;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+        controls.enableZoom = false;
 
         const boxSize = 200;
         const numGridDivs = 50;
@@ -298,15 +301,15 @@ pauseButton.addEventListener('click', () => {
     pause();
 })
 
-musicButton.addEventListener('click', () => {
-    if (musicPaused) {
-        themeSong.play();
-        musicPaused = false;
-    } else {
-        themeSong.pause()
-        musicPaused = true;
-    }
-});
+// musicButton.addEventListener('click', () => {
+//     if (musicPaused) {
+//         themeSong.play();
+//         musicPaused = false;
+//     } else {
+//         themeSong.pause()
+//         musicPaused = true;
+//     }
+// });
 
 muteButton.addEventListener('click', () => {
     if (isMuted) {
@@ -451,8 +454,6 @@ goButton.addEventListener("click", () => {
 // var title = document.querySelector("#title");
 
 // window.addEventListener('mousemove', (e) => {
-//     console.log(document.body.clientHeight)
-//     console.log(e.clientX)
 //     title.style.left = (width / 3) + (e.clientX / 300)+ "px" ;
 //     title.style.top = (height * 1.25)  + (e.clientY / 300)+ "px";
 // });
